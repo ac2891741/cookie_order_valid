@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 1000px;
+            margin: 0 auto;
+        
+        }
+        .sub_header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        form  { 
+            display: table;   
+        }
+        .name_entry, .cookie_entry, .box_entry {
+            display: table-row;
+            align-items: center;
+            
+        }
+        label, input { 
+            display: table-cell;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        .inputs{
+            width: 400px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sub_header">
+            <h1>Update Order:</h1>
+            <a href="/">Back To Purchases</a>
+        </div>
+        <form action="/cookies/update/{{order_update.id}}" method="post">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style="color: RED;">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}    
+            <input type="hidden" name="id" value="{{order_update.id}}">
+            <div class="name_entry">
+                <label for="name">Name:</label>
+                <input type="text" name="name" class="inputs" value="{{order_update.name}}">
+            </div>
+            <div class="cookie_entry">
+                <label for="cookie_type">Cookie Type:</label>
+                <input type="text" name="cookie_type" class="inputs" value="{{order_update.cookie_type}}">
+            </div>
+            <div class="box_entry">
+                <label for="name">Number Of Boxes:</label>
+                <input type="number" name="num_of_boxes" class="inputs" value="{{order_update.num_of_boxes}}">
+            </div>
+            <input type="submit" value="Update Order" class="btn">
+
+
+        </form>
+
+    </div>
+</body>
+</html>
